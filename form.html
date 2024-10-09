@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parkview Gardens</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style_form.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script src="JS/jquery-ui.js"></script>
+  <script src="JS/jquery-3.7.1.min.js"></script>
+  <script defer src="JS/mylib.js"></script>
+  <script defer src="JS/script.js"></script>
+</head>
+<body>
+  <main>
+    <section  class="form_logo">
+      <img src="img/mainlogo.png" alt="logo">
+    </section>
+  <div class="container">
+    <h1>Замовлення дзвінка</h1>
+    <form id="callOrderForm">
+        <label for="fullName">ПІБ:</label>
+        <input type="text" id="fullName" required>
+
+        <label for="email">Пошта:</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Номер телефону:</label>
+        <input type="tel" id="phone" required>
+
+        <label for="apartmentType">Оберіть тип квартири:</label>
+        <select id="apartmentType" required>
+            <option value="" disabled selected>Оберіть квартиру</option>
+            <option value="Однокімнатна">Однокімнатна (40-45 м², $35,000 - $40,000)</option>
+            <option value="Двокімнатна">Двокімнатна (60-68 м², $55,000 - $63,000)</option>
+            <option value="Трикімнатна">Трикімнатна (80-90 м², $80,000 - $90,000)</option>
+            <option value="Чотирикімнатна">Чотирикімнатна (100-110 м², $120,000 - $145,000)</option>
+            <option value="Двоповерхова">Двоповерхова (120-130 м², $160,000 - $180,000)</option>
+        </select>
+
+        <label for="message">Повідомлення:</label>
+        <textarea id="message" rows="4" required></textarea>
+
+        <button type="submit">Замовити дзвінок</button>
+    </form>
+
+    <div id="output" class="output"></div>
+</div>
+</div>
+<div class="home-button-container">
+  <a href="index.html" class="home-button">Повернутися на головну</a>
+</div>
+</main>
+</body>
+</html>

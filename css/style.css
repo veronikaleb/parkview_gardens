@@ -1,0 +1,1459 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* Налаштування стилів за замовчуванням */
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+a, ul, li {
+  text-decoration: none;
+}
+/* Основні стилі для сторінки */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #F0FFF0; /* Ніжний зелений фон */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  
+}
+main {
+  flex: 1; 
+}
+/* Стилі для меню */
+.overlay-navigation {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Прозорий чорний фон для меню */
+  transform: translateY(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+.overlay-slide-down {
+  transition: all .4s ease-in-out;
+  transform: translateY(0);
+}
+.overlay-slide-up {
+  transition: all .8s ease-in-out;
+  transform: translateY(-100%);
+}
+nav, nav ul {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  flex-basis: 20%;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  transform: translateY(-100%);
+}
+nav li a {
+  position: relative;
+  top: 46%;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Work sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+}
+nav li a:before {
+  content: '';
+  width: 70px;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 100;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all .2s linear;
+}
+nav li a:after {
+  content: attr(data-content);
+  font-size: 0.7rem;
+  transition: all .2s linear;
+  opacity: 0;
+  position: absolute;
+  z-index: 100;
+  color: #fff;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  text-transform: none;
+  font-family: 'Open sans', serif;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0;
+}
+nav li a:hover:before {
+  transform: translateX(0);
+  opacity: 1;
+}
+nav li a:hover:after {
+  transform: translateY(15px);
+  opacity: 1;
+}
+/* Кольори для кожного пункту меню */
+nav li:nth-of-type(1) {
+  background-color: #29363B;
+}
+nav li:nth-of-type(2) {
+  background-color: #3CB371;
+}
+nav li:nth-of-type(3) {
+  background-color: #7BA4A8;
+}
+nav li:nth-of-type(4) {
+  background-color: #B0C4DE;
+}
+nav li:nth-of-type(5) {
+  background-color: #99B998;
+}
+/* Анімація для пунктів меню */
+.slide-in-nav-item {
+  animation: slide-in-nav-item 0.4s linear 1 .2s both;
+}
+.slide-in-nav-item-delay-1 {
+  animation: slide-in-nav-item 0.4s linear 1 .4s both;
+}
+.slide-in-nav-item-delay-2 {
+  animation: slide-in-nav-item 0.4s linear 1 .6s both;
+}
+.slide-in-nav-item-delay-3 {
+  animation: slide-in-nav-item 0.4s linear 1 .8s both;
+}
+.slide-in-nav-item-delay-4 {
+  animation: slide-in-nav-item 0.4s linear 1 1s both;
+}
+.slide-in-nav-item-reverse {
+  animation: slide-in-nav-item-reverse .3s linear 1 .5s both;
+}
+.slide-in-nav-item-delay-1-reverse {
+  animation: slide-in-nav-item-reverse .3s linear 1 .4s both;
+}
+.slide-in-nav-item-delay-2-reverse {
+  animation: slide-in-nav-item-reverse .3s linear 1 .3s both;
+}
+.slide-in-nav-item-delay-3-reverse {
+  animation: slide-in-nav-item-reverse .3s linear 1 .2s both;
+}
+.slide-in-nav-item-delay-4-reverse {
+  animation: slide-in-nav-item-reverse .3s linear 1 both;
+}
+/* Кнопка відкриття меню */
+.open-overlay {
+  position: absolute;
+  right: 5rem;
+  top: 3.2rem;
+  z-index: 100;
+  width: 34px;
+  display: block;
+  cursor: pointer;
+}
+
+.open-overlay span {
+  display: block;
+  height: 2px;
+  background-color: #000; /* Чорний колір для полосочок */
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+/* Новий стиль для полосочок */
+.open-overlay span:nth-of-type(1),
+.open-overlay span:nth-of-type(2),
+.open-overlay span:nth-of-type(3) {
+  position: relative;
+}
+
+.open-overlay span:before {
+  content: '';
+  width: 10px; /* Розмір кола */
+  height: 10px; /* Розмір кола */
+  border-radius: 50%;
+  position: absolute;
+  right: -15px; /* Розташування кола з права */
+  top: -2px; /* Вирівнювання кола по вертикалі */
+}
+
+/* Анімація для меню */
+@keyframes slide-in-nav-item {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-nav-item-reverse {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Медійні запити для адаптації під мобільні пристрої */
+@media (max-width: 640px) {
+  nav ul li a {
+    font-size: 11px;
+  }
+  nav li a:after {
+    font-size: 0.6rem;
+  }
+  .open-overlay {
+    right: 1rem;
+  }
+  nav li a:before {
+    width: 15px;
+  }
+}
+
+.home {
+  width: 100%;
+  height: 65vh; /* Висота секції */
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #F0FFF0;
+}
+.background-image-1{
+  background-image: url('../img/picture13.jpg');
+}
+.background-image-2{
+  background-image: url('../img/picture18.jpg');
+}
+.background-image-3{
+  background-image: url('../img/picture17.jpg');
+}
+.background-image-4{
+  background-image: url('../img/picture16.jpg');
+}
+.background-image-5{
+  background-image: url('../img/picture15.jpg');
+}
+/* Логотип */
+.home img {
+  max-width: 250px;
+  height: auto;
+  position: fixed; /* Фіксоване розташування */
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+/* Кнопка меню */
+.open-overlay {
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  z-index: 100;
+  width: 34px;
+  display: block;
+  cursor: pointer;
+}
+
+.open-overlay span {
+  display: block;
+  height: 2px;
+  background-color: #000;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+/* Слоган у правому нижньому кутку */
+.slogan {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #fff; /* Білий колір для тексту */
+  font-size: 44px; /* Розмір тексту */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.6); /* Напівпрозоре чорне тло для кращої видимості */
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 640px) {
+  .home {
+    height: 50vh; /* Менша висота для мобільних пристроїв */
+  }
+
+  /* Менший логотип для мобільних пристроїв */
+  .home img {
+    max-width: 150px;
+    top: 10px;
+    left: 10px;
+  }
+
+  /* Менше меню для мобільних */
+  .open-overlay {
+    right: 10px;
+    top: 10px;
+  }
+
+  .open-overlay span {
+    height: 2px;
+    margin-top: 4px;
+  }
+
+  /* Адаптація слогану для мобільних */
+  .slogan {
+    font-size: 18px;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+  }
+}
+
+.home a {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  left: 50px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #fff;
+}
+/*index style*/
+.name_page{
+  text-align: center;
+  font-size: 25px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #2e7d32;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  max-width: 800px; /* Максимальна ширина галереї */
+  margin: 0 auto; /* Центрування контейнера */
+  margin-bottom: 30px;
+}
+
+.gallery-item {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .gallery {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.parkview-gardens {
+  margin: 20px 5px;
+  background: linear-gradient(to bottom right, rgba(76, 175, 80, 0.7), rgba(139, 195, 74, 0.7)); /* Матовий градієнт */
+  padding: 30px; /* Збільшений відступ */
+  border-radius: 15px; /* Збільшений радіус */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Додана тінь для об'єму */
+}
+
+.parkview-gardens h2 {
+  text-align: center;
+  font-size: 2.3em; /* Збільшений розмір заголовка */
+  color: #2E7D32; /* Темно-зелений колір для заголовка */
+  margin-bottom: 20px; /* Збільшений відступ */
+  font-family: 'Arial', sans-serif; /* Шрифт заголовка */
+  text-transform: uppercase; /* Всі літери заголовка великими */
+}
+
+.parkview-gardens p {
+  font-size: 1.2em; /* Збільшений розмір тексту */
+  color: #333; /* Темно-сірий колір для тексту */
+  line-height: 1.6; /* Висота рядка для кращої читабельності */
+  margin: 15px 0; /* Збільшені відступи між абзацами */
+}
+
+
+.content {
+  display: flex;
+  justify-content: center; /* Центрування контенту */
+  align-items: center; /* Вирівнювання по вертикалі */
+}
+
+.parkview-image {
+  width: 300px; /* Зменшене значення для меншого фото */
+  height: auto; /* Збереження пропорцій */
+  margin-right: 80px; /* Пробіл між фото і текстом */
+}
+
+.parkview-text {
+  max-width: 300px; /* Максимальна ширина для тексту */
+  text-align: left; /* Вирівнювання тексту зліва */
+}
+
+@media (max-width: 768px) {
+  .content {
+      flex-direction: column; /* Вертикальне розташування на малих екранах */
+      align-items: center; /* Центрування на малих екранах */
+  }
+
+  .parkview-image {
+      margin-bottom: 10px; /* Пробіл під фото для вертикального розташування */
+  }
+
+  .parkview-text {
+      max-width: 90%; /* Максимальна ширина для тексту на мобільних */
+  }
+}
+
+@media (max-width: 480px) {
+  .parkview-gardens h2 {
+      font-size: 1.2em; /* Менший розмір заголовка на малих екранах */
+  }
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 5px;
+}
+
+.feature-block {
+  background-color: #b2e0b2; /* Світло-зелений фон */
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: calc(30% - 20px); /* Ширина для трьох колонок */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.feature-block h3 {
+  color: #2c3e50; /* Темно-зелений колір заголовку */
+  margin-bottom: 10px;
+}
+
+.feature-block p {
+  color: #34495e; /* Темно-сірий колір тексту */
+  word-wrap: break-word; /* Запобігає виходу тексту за межі */
+}
+
+/* Ефект при наведенні */
+.feature-block:hover {
+  transform: scale(1.05);
+}
+
+.advantages-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: #2e7d32; /* Темно-зелений для заголовка */
+}
+
+/* Адаптація для мобільних пристроїв */
+@media screen and (max-width: 768px) {
+  .feature-block {
+    width: calc(45% - 20px); /* Ширина для двох колонок на планшетах */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .feature-block {
+    width: 100%; /* Повна ширина для телефонів */
+    margin: 10px 0; /* Коригування відступів */
+  }
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Відступ між блоками */
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+.stat-block {
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Тонка рамка */
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* Прозорий блок */
+  padding: 20px;
+  width: 180px; /* Фіксована ширина блоку */
+  text-align: left;
+}
+
+.stat-number {
+  font-size: 3em; /* Великі цифри */
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2E8B57; /* Насичений зелений колір */
+}
+
+.stat-text {
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Адаптація для телефонів */
+@media (max-width: 600px) {
+  .stats-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-block {
+    margin-bottom: 15px;
+  }
+}
+/*banner*/
+.full-width-banner {
+  background-image: url('../img/picture12.jpg'); /* Заміни на свій шлях до зображення */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px; /* Можеш змінити висоту на потрібну */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.full-width-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 128, 0, 0.2); /* Ніжно-зелений прозорий шар */
+  z-index: 1;
+}
+
+.full-width-banner h2 {
+  position: relative;
+  z-index: 2;
+  font-size: 2.5em;
+  color: #fff; 
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Тінь для покращення читабельності */
+  text-align: center;
+  margin: 0;
+}
+/*opening*/
+.slide-left-block {
+  opacity: 0; /* Початково приховано */
+  animation: slideFromLeft 1s ease-out forwards; /* Додаємо анімацію */
+  animation-delay: 0.3s; /* Затримка анімації */
+}
+
+/* Анімація відкриття зліва направо */
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/*company banner*/
+.developer-tag {
+    text-align: center; /* Центрувати текст */
+    font-size: 1.5em; /* Розмір тексту */
+    color: #2E7D32; /* Темно-зелений колір */
+    margin-bottom: 10px; /* Відступ під текстом */
+    text-transform: uppercase; /* Великі літери */
+    font-family: 'Arial', sans-serif; /* Шрифт тексту */
+}
+
+.cityscape-developers {
+    background-image: url('img/cityscape.jpg'); /* Заміни на свій шлях до зображення */
+    background-size: cover; /* Заповнити блок фоном */
+    background-position: center; /* Центрувати фон */
+    padding: 60px 20px; /* Відступи зверху та знизу */
+    text-align: center; /* Центрувати текст */
+    color: white; /* Білий колір тексту */
+}
+
+.cityscape-developers h1 {
+    font-size: 3em; /* Розмір заголовка */
+    margin-bottom: 10px; /* Відступ під заголовком */
+    text-transform: uppercase; /* Великі літери */
+    font-family: 'Arial', sans-serif; /* Шрифт заголовка */
+    color: rgba(255, 255, 255, 0.9); /* М'який білий колір */
+}
+
+.cityscape-developers p {
+    font-size: 1.5em; /* Розмір тексту */
+    color: rgba(255, 255, 255, 0.8); /* М'який білий колір для тексту */
+}
+
+/* Адаптивні стилі */
+@media (max-width: 768px) {
+    .developer-tag {
+        font-size: 1.2em; /* Зменшений розмір тексту на малих екранах */
+    }
+
+    .cityscape-developers h1 {
+        font-size: 2.5em; /* Зменшений розмір заголовка на малих екранах */
+    }
+
+    .cityscape-developers p {
+        font-size: 1.2em; /* Зменшений розмір тексту на малих екранах */
+    }
+}
+.developer-tag {
+  text-align: center;
+  font-size: 1.5em;
+  color: #2E7D32;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Arial', sans-serif;
+}
+
+.cityscape-developers {
+  background-image: url('../img/picture10.jpg'); /* Заміни на свій шлях до зображення */
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: white; /* Колір тексту */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Тінь для покращення читабельності */
+}
+
+.cityscape-developers h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Arial', sans-serif;
+}
+
+.cityscape-developers p {
+  font-size: 1.5em;
+}
+
+/* Адаптивні стилі */
+@media (max-width: 768px) {
+  .developer-tag {
+      font-size: 1.2em;
+  }
+
+  .cityscape-developers h1 {
+      font-size: 2.5em;
+  }
+
+  .cityscape-developers p {
+      font-size: 1.2em;
+  }
+}
+/*key features*/
+.key-features-section {
+  display: flex;
+  flex-direction: column; /* Вертикальне розташування */
+  align-items: center; /* Центрування */
+  padding: 20px;
+  margin: 20px 5px; 
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(192, 217, 192, 0.9)); /* Зелений градієнт */
+  border-radius: 10px;
+}
+
+.key-feature-block {
+  width: 100%; /* Ширина на всю ширину */
+  max-width: 600px; /* Максимальна ширина */
+  margin: 10px 0; /* Відступи між блоками */
+  padding: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тінь для блоку */
+}
+
+.key-features-section h2 {
+  font-size: 2em;
+  color: #2E7D32; /* Темно-зелений колір заголовка */
+  margin-bottom: 20px;
+}
+
+.key-feature-block h3 {
+  font-size: 1.5em; /* Розмір заголовка підпункту */
+  color: #2E7D32;
+}
+
+.key-feature-block p {
+  font-size: 1.1em; /* Розмір тексту */
+  color: #333; /* Темно-сірий колір тексту */
+  line-height: 1.5; /* Висота рядка для кращої читабельності */
+}
+
+@media (max-width: 768px) {
+  .key-features-section {
+      padding: 15px; /* Менший відступ на малих екранах */
+  }
+
+  .key-feature-block {
+      padding: 10px; /* Менший відступ для підпунктів */
+  }
+
+  .key-features-section h2 {
+      font-size: 1.5em; /* Менший заголовок на малих екранах */
+  }
+}
+.contact-block {
+  display: flex;
+  justify-content: center; /* Center all items in the block */
+  align-items: center; /* Center vertically */
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.contact-info {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+}
+
+.contact-frame {
+  background: linear-gradient(to bottom right, rgba(76, 175, 80, 0.7), rgba(139, 195, 74, 0.7));
+  padding: 20px;
+  font-size: 2rem; 
+  width: 100%; /* Full width of parent */
+  max-width: 300px; /* Optional, can be removed if full width is desired */
+  margin: 0 auto; /* Center the frame */
+}
+
+.contact-frame h3 {
+  margin-bottom: 10px;
+  color: #2e8b57;
+  font-size: 1.4rem; /* Increased font size for the heading */
+}
+
+.contact-frame p {
+  color: #fff;
+  margin: 5px 0;
+  font-size: 1.2rem; /* Increased font size for text */
+}
+/* Загальний стиль */
+.map-container iframe {
+  width: 100%; /* Займає всю ширину контейнера */
+  height: 450px; /* Фіксована висота для великих екранів */
+  border: 0;
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+  .map-container iframe {
+      height: 300px; /* Зменшена висота для мобільних пристроїв */
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container iframe {
+      height: 250px; /* Ще менша висота для дуже маленьких екранів */
+  }
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+  .contact-block {
+      flex-direction: column; /* Stack vertically on small screens */
+      align-items: center; /* Center align items */
+      padding: 10px;
+  }
+
+  .map-container {
+      width: 100%; /* Full width for map on small screens */
+      margin-right: 0; /* Remove right margin */
+      margin-bottom: 20px; /* Add bottom margin */
+  }
+
+  .contact-info {
+      width: 100%; /* Full width for contact info on small screens */
+      justify-content: center; /* Center content */
+      align-items: center; /* Center vertically */
+  }
+
+  .contact-frame {
+      max-width: 90%; /* Max width for smaller screens */
+      margin: 0 auto; /* Center the frame */
+  }
+}
+.video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 560px; /* Максимальна ширина для великих екранів */
+  padding-bottom: 56.25%; /* Співвідношення 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Для екранів менше 768px */
+@media screen and (max-width: 768px) {
+  .video-container {
+    max-width: 400px; /* Зменшення ширини для планшетів */
+  }
+}
+
+/* Для мобільних телефонів */
+@media screen and (max-width: 480px) {
+  .video-container {
+    max-width: 320px; /* Зменшення ширини для телефонів */
+  }
+}
+
+
+/*Footer*/
+/* Стилі для футера */
+.footer {
+  background-color: #29363B; /* Тіньовий колір, відповідний до палітри сайту */
+  color: #F0FFF0; /* Текст у світлому кольорі */
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.footer ul li a {
+  color: #3CB371; /* Зелений колір для посилань */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Додавання плавного переходу */
+}
+
+.footer ul li a:hover {
+  color: #66CDAA; /* Зміна кольору на синій при наведенні */
+  text-shadow: 0 0 5px rgba(30, 144, 255, 0.5); /* Додавання світлового ефекту */
+}
+
+.footer p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  transition: color 0.3s ease; /* Плавний перехід кольору для тексту */
+}
+
+.footer p:hover {
+  color: #3CB371; /* Зміна кольору тексту при наведенні */
+}
+.social-media {
+  margin: 20px 0;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #3CB371; /* Зелений фон для іконок */
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #1E90FF; /* Синій фон при наведенні */
+  transform: scale(1.1); /* Збільшення іконок при наведенні */
+}
+
+.social-icon.facebook { background-color: #3b5998; }
+.social-icon.youtube { background-color: #e4405f; }
+.social-icon.instagram { background-color: #FF1493; }
+@media (max-width: 640px) {
+  .footer {
+    padding: 10px;
+  }
+
+  .footer-menu {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .footer-menu li {
+    margin-bottom: 10px;
+  }
+
+  .footer-menu li a {
+    font-size: 14px;
+  }
+
+  .social-media {
+    margin: 10px 0;
+  }
+
+  .social-icon {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+  }
+
+  .footer p {
+    font-size: 12px;
+  }
+}
+.footer-bottom {
+  color: #FFFFFF; /* Білий текст */
+  font-size: 12px; /* Розмір шрифту для тексту */
+  margin-top: 20px; /* Відступ зверху */
+  padding: 5px 0; /* Внутрішні відступи зверху і знизу */
+}
+
+.footer-bottom p {
+  text-align: center; /* Вирівнювання тексту вліво */
+  padding-left: 10px; /* Внутрішній відступ зліва */
+  margin: 0; /* Відсутність зовнішніх відступів */
+}
+
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 640px) {
+  .footer-bottom {
+    font-size: 0.9rem; /* Зменшений шрифт на мобільних */
+    padding: 8px 0; /* Менші відступи на мобільних */
+  }
+}
+
+/*flats style*/
+.apartment-blocks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.apartment-type {
+    width: 100%;
+    max-width: 1000px; /* Limit the width on larger screens */
+    margin-bottom: 20px;
+}
+.apartment-type h2 {
+  text-align: center;
+}
+.image-gallery {
+    display: flex;
+    justify-content: center; /* Center images */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+}
+
+.image-item {
+    flex: 1 1 calc(33.33% - 30px); /* Adjust for three images in a row with margin */
+    margin: 15px; /* Increased space between images */
+    text-align: center; /* Center text under images */
+}
+
+.image-item img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.price-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.price-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+.apartment-title {
+  font-size: 1.2em; /* Size of the apartment title */
+  color: #333; /* Color for the title */
+  margin: 10px 0; /* Space above and below the title */
+  font-weight: bold; /* Make the title bold */
+}
+
+.apartment-area {
+  font-size: 1em; /* Size of the area text */
+  color: #555; /* Color for the area */
+  margin: 5px 0; /* Space above and below the area text */
+}
+
+/* Media Queries for Mobile Adaptation */
+@media (max-width: 768px) {
+    .apartment-blocks {
+        margin: 10px;
+    }
+
+    .image-item {
+        flex: 1 1 calc(50% - 30px); /* Adjust to 2 images in a row on smaller screens */
+    }
+
+    .image-item img {
+        max-width: 100%; /* Adjust image size for mobile */
+    }
+
+    .price-button {
+        width: 100%; /* Make buttons full width on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .image-item {
+        flex: 1 1 100%; /* Stack images in a single column on very small screens */
+    }
+}
+
+/*commercial page*/
+.commercial-description {
+  background: linear-gradient(to bottom right, rgba(76, 175, 80, 0.7), rgba(139, 195, 74, 0.7));
+  color: white; /* Білий текст */
+  padding: 20px;
+  text-align: center;
+  width: 90%; /* На всю ширину */
+  margin: 0 auto; /* Центрування */
+}
+
+.commercial-description p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  max-width: 1200px; /* Обмеження ширини тексту */
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .commercial-description p {
+      font-size: 1em; /* Зменшений шрифт для телефонів */
+  }
+}
+
+.discount-block {
+  position: relative;
+  background-image: url('../img/commercial/c2.jpg'); /* Шлях до фото фону */
+  background-size: cover;
+  background-position: center;
+  height: 60vh; /* Висота блоку */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.discount-text {
+  position: relative;
+  color: white;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5); /* Напівпрозорий чорний фон для читабельності */
+  border-radius: 10px;
+}
+
+.discount-text h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.order-button {
+  background-color: #2e8b57;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.order-button a {
+  text-decoration: none;
+  color: white; /* Встановлює білий колір для тексту */
+}
+
+.order-button a:visited {
+  color: white; /* Зберігає білий колір для відвіданих посилань */
+}
+
+.order-button:hover {
+  background-color: #006400;
+}
+
+@media (max-width: 768px) {
+  .discount-block {
+      height: auto;
+      padding: 20px;
+  }
+
+  .discount-text h2 {
+      font-size: 1.5em;
+  }
+
+  .order-button {
+      font-size: 1em;
+      padding: 10px 15px;
+  }
+}
+
+.commercial-block {
+  display: flex;
+  align-items: center; /* Центрування по вертикалі */
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto; /* Центрування блоку */
+}
+
+.commercial-image img {
+  max-width: 80%; /* Масштабування зображення */
+
+}
+
+.commercial-info {
+  flex-grow: 1; /* Текст займає решту простору */
+  padding-left: 20px;
+  justify-content: center;
+  padding-right: 80px;
+}
+
+.commercial-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #2e8b57; /* Зелений колір тексту */
+}
+
+.commercial-info li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.commercial_name {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .commercial-block {
+      flex-direction: column; /* Вертикальне розташування на телефонах */
+      padding: 15px;
+  }
+
+  .commercial-info {
+      padding-left: 0;
+      margin-top: 15px;
+  }
+
+  .commercial-image img {
+      max-width: 100%; /* Масштабування зображення для телефонів */
+      border-radius: 10px;
+  }
+}
+/*price page*/
+.price-table {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0fff0; /* Light green background */
+}
+
+.price-table h2 {
+  color: #2e8b57; /* Dark green heading */
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.price-table h3 {
+  color: #28a745; /* Dark green heading */
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.price-table-wrapper {
+  overflow-x: auto; /* Allow horizontal scroll on small screens */
+}
+
+.price-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  background-color: white;
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.price-table th, .price-table td {
+  padding: 15px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.price-table th {
+  background-color: #2e8b57; /* Green header */
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.price-table td {
+  background-color: #e0ffe0; /* Lighter green for cells */
+  color: #333;
+}
+
+.price-table tbody tr:hover td {
+  background-color: #ccffcc; /* Lighter green on hover */
+}
+
+.price-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+/* Media Queries for Mobile Adaptation */
+@media (max-width: 768px) {
+  .price-table table, .price-table th, .price-table td {
+    font-size: 14px; /* Reduce font size */
+  }
+
+  .price-table th, .price-table td {
+    padding: 10px;
+  }
+
+  .price-table-wrapper {
+    overflow-x: auto; /* Allow horizontal scrolling */
+  }
+
+  .price-table table {
+    width: 100%; /* Ensure table stays within screen */
+  }
+}
+
+/*about us page*/
+.about-company {
+  background-color: #f0fff0; /* Світлий зелений фон */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+}
+.about-content{
+  justify-content: center;
+  text-align: justify;
+}
+
+.about-content h2 {
+  color: #2E7D32; /* Зелений колір заголовка */
+  margin-bottom: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+.about-content p {
+  font-size: 20px;
+  color: #333; /* Темний колір тексту */
+  line-height: 1.6; /* Висота рядка для легшого читання */
+  margin-bottom: 10px; /* Відступ між абзацами */
+}
+
+.complexes-title {
+  text-align: center;
+  color: #2E7D32;
+  margin: 30px 0 15px;
+  font-size: 25px;
+}
+
+.complexes-gallery {
+  display: flex;
+  justify-content: space-between; /* Простір між блоками */
+  flex-wrap: wrap; /* Перехід на новий ряд, якщо не вистачає місця */
+}
+
+.complex {
+  flex: 1 1 calc(33.33% - 20px); /* Три блоки в ряд з відступами */
+  margin: 10px; /* Відступи між блоками */
+  justify-content: center; /* Центрування тексту */
+  text-align: center;
+}
+
+.complex img {
+  width: 100%; /* Ширина 100% для адаптації */
+  border-radius: 10px; /* Заокруглені кути зображення */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тінь для зображення */
+}
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+  .about-company {
+      padding: 15px; /* Менші відступи на мобільних */
+  }
+
+  .about-content h2 {
+      font-size: 1.5rem; /* Зменшений розмір заголовка на мобільних */
+  }
+
+  .about-content p {
+      font-size: 1rem; /* Зменшений розмір тексту на мобільних */
+  }
+
+  .complex {
+      flex: 1 1 100%; /* Один блок на весь ряд на мобільних */
+  }
+}
+.bg_team {
+  background-size: cover; /* Зображення покриває всю секцію */
+  background-position: center; /* Центрування зображення */
+  padding: 20px 0; /* Внутрішні відступи */
+}
+
+.founders-gallery {
+  display: flex; /* Використовуємо Flexbox для горизонтального розташування блоків */
+  justify-content: center; /* Центруємо блоки по горизонталі */
+  flex-wrap: wrap; /* Дозволяє переносити блоки на новий ряд, якщо не вистачає місця */
+  margin: 20px auto; /* Відступи знизу та автоматичне центрування */
+}
+
+.founder-block {
+  text-align: center; /* Центрування вмісту */
+  margin: 10px; /* Відступи між блоками */
+  width: 300px; /* Ширина блоку, можна змінити за потреби */
+  position: relative; /* Позиціонування для абсолютного позиціонування тексту */
+  display: flex; /* Використання flex для вертикального центрування */
+  flex-direction: column; /* Розташування елементів вертикально */
+  justify-content: space-between; /* Простір між елементами */
+  height: 400px; /* Встановлення фіксованої висоти для однорідності */
+}
+
+.founder-image {
+  width: 100%; /* Зменшення розміру зображення */
+  height: auto; /* Збереження пропорцій */
+  border-radius: 10px; /* Закруглені кути, за бажанням */
+}
+
+.founder-name, .founder-title {
+  margin-top: 10px; /* Відступ зверху */
+  font-size: 1.2rem; /* Розмір шрифту для імені */
+  color: #FFFFFF; /* Білий колір тексту */
+  background-color: rgba(46, 125, 50, 0.7); /* Напівпрозорий зелений фон */
+  border-radius: 5px; /* Закруглені кути для фону тексту */
+  padding: 5px; /* Внутрішні відступи для фону тексту */
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+  .founders-gallery {
+    flex-direction: column; /* Встановлюємо вертикальне розташування для мобільних */
+    align-items: center; /* Центруємо блоки по горизонталі */
+  }
+
+  .founder-block {
+    width: 90%; /* Зменшена ширина для мобільних */
+    height: auto; /* Висота автоматична для мобільних */
+  }
+
+  .founder-name, .founder-title {
+    font-size: 1rem; /* Менший розмір шрифту для мобільних */
+  }
+}
+
+
